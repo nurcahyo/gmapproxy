@@ -1,0 +1,232 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "place/place_service.proto",
+    "version": "version not set"
+  },
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/place/nearby": {
+      "get": {
+        "operationId": "NearbySearchByTypes",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/placeResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "city",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "latlong",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "radius",
+            "in": "query",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "types",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "country",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": ["PlaceService"]
+      }
+    }
+  },
+  "definitions": {
+    "GEOMETRYLOCATION": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "GEOMETRYVIEWPORT": {
+      "type": "object",
+      "properties": {
+        "northeast": {
+          "$ref": "#/definitions/VIEWPORTNORTHEAST"
+        },
+        "southwest": {
+          "$ref": "#/definitions/VIEWPORTSOUTHWEST"
+        }
+      }
+    },
+    "RESULTSGEOMETRY": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/GEOMETRYLOCATION"
+        },
+        "viewport": {
+          "$ref": "#/definitions/GEOMETRYVIEWPORT"
+        }
+      }
+    },
+    "RESULTSPHOTOS": {
+      "type": "object",
+      "properties": {
+        "height": {
+          "type": "number",
+          "format": "double"
+        },
+        "html_attributions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "photo_reference": {
+          "type": "string"
+        },
+        "width": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "RESULTSPLUS_CODE": {
+      "type": "object",
+      "properties": {
+        "compound_code": {
+          "type": "string"
+        },
+        "global_code": {
+          "type": "string"
+        }
+      }
+    },
+    "ResponseRESULTS": {
+      "type": "object",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/RESULTSGEOMETRY"
+        },
+        "icon": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "photos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RESULTSPHOTOS"
+          }
+        },
+        "place_id": {
+          "type": "string"
+        },
+        "plus_code": {
+          "$ref": "#/definitions/RESULTSPLUS_CODE"
+        },
+        "rating": {
+          "type": "number",
+          "format": "double"
+        },
+        "reference": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vicinity": {
+          "type": "string"
+        }
+      }
+    },
+    "VIEWPORTNORTHEAST": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "VIEWPORTSOUTHWEST": {
+      "type": "object",
+      "properties": {
+        "lat": {
+          "type": "number",
+          "format": "double"
+        },
+        "lng": {
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "placeResponse": {
+      "type": "object",
+      "properties": {
+        "html_attributions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "next_page_token": {
+          "type": "string"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResponseRESULTS"
+          }
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

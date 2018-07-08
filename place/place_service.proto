@@ -1,0 +1,86 @@
+syntax = "proto3";
+package place;
+
+import "google/api/annotations.proto";
+
+
+service PlaceService {
+  rpc NearbySearchByTypes(Request) returns (Response) {
+    option (google.api.http) = {
+      get: "/v1/place/nearby"
+    };
+  }
+}
+
+message Request {
+  string city = 2;
+  string latlong = 3;
+  int32 radius = 4;
+  string types = 5;
+  string country = 6;
+  string key = 7;
+}
+
+message Response {
+  repeated string html_attributions = 1;
+  string next_page_token = 2;
+  message RESULTS {
+    message GEOMETRY {
+
+      message LOCATION {
+        double lat = 1;
+        double lng = 2;
+      }
+
+      LOCATION location = 1;
+
+      message VIEWPORT {
+
+        message NORTHEAST {
+          double lat = 1;
+          double lng = 2;
+        }
+
+        NORTHEAST northeast = 1;
+
+        message SOUTHWEST {
+          double lat = 1;
+          double lng = 2;
+        }
+
+        SOUTHWEST southwest = 2;
+      }
+
+      VIEWPORT viewport = 2;
+    }
+
+    GEOMETRY geometry = 1;
+    string icon = 2;
+    string id = 3;
+    string name = 4;
+
+    message PHOTOS {
+      double height = 1;
+      repeated string html_attributions = 2;
+      string photo_reference = 3;
+      double width = 4;
+    }
+
+    repeated PHOTOS photos = 5;
+    string place_id = 6;
+
+    message PLUS_CODE {
+      string compound_code = 1;
+      string global_code = 2;
+    }
+
+    PLUS_CODE plus_code = 7;
+    double rating = 8;
+    string reference = 9;
+    string scope = 10;
+    repeated string types = 11;
+    string vicinity = 12;
+  }
+  repeated RESULTS results = 3;
+  string status = 4;
+}
