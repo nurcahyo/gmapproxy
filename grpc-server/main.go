@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	place "github.com/aniqma/gmapproxy/place"
+	place "github.com/nurcahyo/gmapproxy/place"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
