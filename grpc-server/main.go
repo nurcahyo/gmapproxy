@@ -17,10 +17,8 @@ const (
 	port = ":50051"
 )
 
-// server is used to implement helloworld.GreeterServer.
 type server struct{}
 
-// SayHello implements helloworld.GreeterServer
 func (s *server) NearbySearchByTypes(ctx context.Context, in *place.Request) (*place.Response, error) {
 	if in.GetCity() == "" || in.GetLatlong() == "" {
 		return nil, errors.New("city, country and lat long are required")
