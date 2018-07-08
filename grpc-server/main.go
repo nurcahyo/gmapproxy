@@ -20,12 +20,20 @@ const (
 type server struct{}
 
 func (s *server) NearbySearchByTypes(ctx context.Context, in *place.Request) (*place.Response, error) {
-	if in.GetCity() == "" || in.GetLatlong() == "" {
+	if in.GetCountry() == "" || in.GetCity() == "" || in.GetLatlong() == "" {
 		return nil, errors.New("city, country and lat long are required")
 	}
-	if len(in.GetTypes()) < 1 {
-		return nil, errors.New("Types can't be empty")
+	
+	if in.GetTypes() == "" {
+		return nil, errors.New("Types can't empty")
 	}
+	
+	if in.GetKey() == "" {
+		return nil, errors.New("API Key can't empty")
+	}
+	
+	
+	
 	types := strings.Split(in.GetTypes(), ",")
 	sort.Sort(sort.StringSlice(types))
 	in.Types = strings.Join(types, ",")
