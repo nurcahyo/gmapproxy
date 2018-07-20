@@ -2,7 +2,7 @@
 
 This is a simple GRPC service to Find Nearby Search from Google Place API.
 
-The search result will automatically stored in MYSQL for 720 Hours / 3 Days for reduce api call limit and optimize multiple types search.
+The search result will automatically stored in MYSQL for 720 Hours / 30 Days for reduce api call limit and optimize multiple types search.
 
 Any data more than 720 Hours will be Purged due to Cache Policy in Google Place Term Of Services.
 
